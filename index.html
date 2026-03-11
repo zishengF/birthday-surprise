@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生日专属盲盒 🎂</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        body { background: #fff0f6; font-family: "Microsoft YaHei", sans-serif; text-align: center; padding-top: 50px; overflow: hidden; margin: 0; min-height: 100vh; color: #d63384; }
+        .box { background: rgba(255, 255, 255, 0.9); width: 85%; max-width: 400px; margin: auto; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 10; position: relative; }
+        input { padding: 12px; width: 80%; border: 2px solid #ff99cc; border-radius: 10px; margin-bottom: 15px; text-align: center; font-size: 1.1rem; background: #fdf5f8; outline: none; }
+        button { background: linear-gradient(45deg, #ff69b4, #ff1493); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-size: 1rem; cursor: pointer; transition: 0.3s; }
+        #quiz, #final { display: none; }
+        video { width: 100%; border-radius: 15px; margin-top: 20px; border: 3px solid #ff99cc; background: #000; }
+        
+        /* 浪漫爱心特效 */
+        .heart { position: absolute; background-color: #ff69b4; transform: rotate(-45deg); animation: fall linear infinite; pointer-events: none; z-index: 1; opacity: 0.7; }
+        .heart:before, .heart:after { content: ''; position: absolute; width: 100%; height: 100%; background-color: #ff69b4; border-radius: 50%; }
+        .heart:before { top: -50%; left: 0; }
+        .heart:after { left: 50%; top: 0; }
+        @keyframes fall { 0% { transform: translateY(-10vh) rotate(-45deg) scale(0.5); } 100% { transform: translateY(110vh) rotate(-45deg) scale(1.5); opacity: 0; } }
+        
+        /* 背景星光闪烁 */
+        .star { position: absolute; background-color: white; border-radius: 50%; opacity: 0; animation: twinkle 4s ease-in-out infinite alternate; pointer-events: none; z-index: 0; }
+        @keyframes twinkle { 0% { opacity: 0; } 50% { opacity: 0.8; } 100% { opacity: 0; } }
+    </style>
+</head>
+<body>
+
+<div class="box" id="lock">
+    <h2>🔒 请输入654321</h2>
+    <input type="password" id="pwd" maxlength="6" placeholder="******">
+    <br><button onclick="check()">开启盒子</button>
+</div>
+
+<div class="box" id="quiz">
+    <h3>最后一步挑战！</h3>
+    <p>你应该叫我什么呢？(两个字)</p>
+    <input type="text" id="q1" placeholder="输入称呼...">
+    <br><button onclick="showFinal()">拆开礼盒</button>
+</div>
+
+<div class="box" id="final">
+    <h1>生日快乐，老婆蛋！🎂</h1>
+    <video id="birthdayVideo" controls playsinline>
+        <source src="video.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+    </video>
+</div>
+
+<script>
+    function check() {
+        if(document.getElementById('pwd').value === "123456") {
+            document.getElementById('lock').style.display = 'none';
+            document.getElementById('quiz').style.display = 'block';
+        } else { alert("密码不对哦，试试123456！"); }
+    }
+    
+    function showFinal() {
+        if (document.getElementById('q1').value === "老公") {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('final').style.display = 'block';
+            
+            // 触发彩带爆炸效果
+            confetti({ particleCount: 300, spread: 200, origin: { y: 0.6 } });
+            
+            // 生成爱心和星星特效
+            for (let i = 0; i < 25; i++) createHeart();
+            for (let i = 0; i < 30; i++) createStar();
+        } else { alert("不对，再想想，两个字"); }
+    }
+
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.width = heart.style.height = (Math.random() * 20 + 15) + 'px';
+        heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
+        document.body.appendChild(heart);
+        heart.addEventListener('animationend', () => heart.remove());
+    }
+
+    function createStar() {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 100 + 'vh';
+        star.style.width = star.style.height = (Math.random() * 3 + 2) + 'px';
+        star.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        document.body.appendChild(star);
+        star.addEventListener('animationend', () => star.remove());
+    }
+</script>
+</body>
+</html>
