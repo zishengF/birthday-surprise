@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>生日专属盲盒 🎂</title>
+    <title>20260329专属盲盒 🎂</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         body { background: #fff0f6; font-family: "Microsoft YaHei", sans-serif; text-align: center; padding-top: 50px; overflow: hidden; margin: 0; min-height: 100vh; color: #d63384; }
@@ -28,16 +28,16 @@
 <body>
 
 <div class="box" id="lock">
-    <h2>🔒 请输入654321</h2>
+    <h2>🔒 首先请输入654321</h2>
     <input type="password" id="pwd" maxlength="6" placeholder="******">
-    <br><button onclick="check()">开启盒子</button>
+    <br><button onclick="check()">CONTINUE</button>
 </div>
 
 <div class="box" id="quiz">
-    <h3>最后一步挑战！</h3>
+    <h3>还差最后一步！</h3>
     <p>你应该叫我什么呢？(两个字)</p>
     <input type="text" id="q1" placeholder="输入称呼...">
-    <br><button onclick="showFinal()">拆开礼盒</button>
+    <br><button onclick="showFinal()">OPEN</button>
 </div>
 
 <div class="box" id="final">
@@ -53,7 +53,7 @@
         if(document.getElementById('pwd').value === "123456") {
             document.getElementById('lock').style.display = 'none';
             document.getElementById('quiz').style.display = 'block';
-        } else { alert("密码不对哦，试试123456！"); }
+        } else { alert("嘿嘿骗你的，其实是123456！"); }
     }
     
     function showFinal() {
@@ -67,7 +67,7 @@
             // 生成爱心和星星特效
             for (let i = 0; i < 25; i++) createHeart();
             for (let i = 0; i < 30; i++) createStar();
-        } else { alert("不对，再想想，两个字"); }
+        } else { alert("叫老公！"); }
     }
 
     function createHeart() {
@@ -92,4 +92,5 @@
     }
 </script>
 </body>
+
 </html>
