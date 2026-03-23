@@ -28,7 +28,7 @@
 <body>
 
 <div class="box" id="lock">
-    <h2>🔒 首先请输入654321</h2>
+    <h2>🔒 首先请输入123456</h2>
     <input type="password" id="pwd" maxlength="6" placeholder="******">
     <br><button onclick="check()">CONTINUE</button>
 </div>
@@ -50,7 +50,7 @@
 
 <script>
     function check() {
-        if(document.getElementById('pwd').value === "155468") {
+        if(document.getElementById('pwd').value === "123456") {
             document.getElementById('lock').style.display = 'none';
             document.getElementById('quiz').style.display = 'block';
         } else { alert("嘿嘿骗你的，其实是123456！"); }
